@@ -5,9 +5,12 @@ from collections import defaultdict
 from temporaldata import Interval, RegularTimeSeries, IrregularTimeSeries
 
 
-@dataclass
+@dataclass(init=False)
 class MovementEvents(RegularTimeSeries):
     """"""
+
+    def __init__(self, *, sampling_rate, domain=None, domain_start=0, **kwargs):
+        super().__init__(sampling_rate=sampling_rate, domain=domain, domain_start=domain_start, **kwargs)
 
     @classmethod
     def from_pandas(cls, in_df: pd.DataFrame) -> "MovementEvents":
